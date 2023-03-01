@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Inventory Management</title>
+    <style>
+      body { margin: 0; padding-bottom: 3rem; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    </style>
+  </head>
+  <body>
+    <h1>Item 01</h1>
+    <span id="status"></span>
+    <style>
+        #status {
+            height: 50px;
+            width: 50px;
+            background-color: black;
+            border-radius: 50%;
+            display: inline-block;
+        }
+    </style>
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script>
+      var socket = io();
+      var statusSymbol = document.getElementById('status');
+
+      threshold = 10;
+
+      socket.on('weight', function(currentVal) {
+        if (currentVal > threshold){
+            statusSymbol.style.backgroundColor = "green";
+        } else{
+            statusSymbol.style.backgroundColor = "red";
+        }
+      });
+    </script>
+  </body>
+</html>
